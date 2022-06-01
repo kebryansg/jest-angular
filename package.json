@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:coverage": "ng test --coverage",
+    "test:watch": "ng test --watch",
     "test:deploy": "ng test --watch=false --coverage"
   },
   "private": true,
