@@ -1,5 +1,5 @@
 import {Directive, ElementRef, forwardRef, HostBinding, HostListener, Input, OnInit,} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 export enum STATE {
   NORMAL = 'normal',
@@ -23,6 +23,7 @@ export enum STATE {
 export class InputValueAcessorDirective
   implements ControlValueAccessor, OnInit {
   @Input() controlState: boolean = true;
+  @Input() formControl!: FormControl;
 
   @HostBinding('value') hostValue: any;
   @HostBinding('state') hostState: string | undefined;
@@ -34,6 +35,11 @@ export class InputValueAcessorDirective
 
   ngOnInit() {
     this.hostState = this.elementRef.nativeElement.state;
+
+    this.formControl.markAsTouched = () =>
+      this.hostState = this.checkClassList(
+        this.elementRef.nativeElement.classList
+      );
   }
 
 
