@@ -1,7 +1,17 @@
-import {Directive, ElementRef, forwardRef, HostBinding, HostListener, Input, OnInit,} from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  forwardRef,
+  HostBinding,
+  HostListener,
+  Injector,
+  Input,
+  OnInit,
+} from '@angular/core';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
 
-export enum STATE {
+export const enum STATE {
   NORMAL = 'normal',
   SUCCESS = 'success',
   DISABLED = 'disabled',
@@ -21,27 +31,37 @@ export enum STATE {
   ],
 })
 export class InputValueAcessorDirective
-  implements ControlValueAccessor, OnInit {
+  implements ControlValueAccessor, OnInit, AfterViewInit {
   @Input() controlState: boolean = true;
-  @Input() formControl!: FormControl;
 
   @HostBinding('value') hostValue: any;
   @HostBinding('state') hostState: string | undefined;
 
   private lastValue: any;
+  ngControl!: NgControl;
 
-  constructor(private elementRef: ElementRef,) {
+  constructor(private elementRef: ElementRef,
+              private inj: Injector) {
+
   }
 
   ngOnInit() {
     this.hostState = this.elementRef.nativeElement.state;
+  }
+
+  ngAfterViewInit() {
+    this.ngControl = this.inj.get(NgControl)
 
     this.formControl.markAsTouched = () =>
       this.hostState = this.checkClassList(
         this.elementRef.nativeElement.classList
       );
+
   }
 
+  get formControl() {
+    return this.ngControl.control! as FormControl;
+  }
 
   writeValue(value: any) {
     this.hostValue = this.lastValue = value == null ? '' : value;
@@ -71,7 +91,7 @@ export class InputValueAcessorDirective
   }
 
   setDisabledState(isDisabled: boolean) {
-    this.hostState = isDisabled? STATE.DISABLED : this.hostState
+    this.hostState = isDisabled ? STATE.DISABLED : this.hostState
   }
 
   private shouldBlockOnMaxLength(element: ElementRef, value: number | string) {
