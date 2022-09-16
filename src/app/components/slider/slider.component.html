@@ -1,0 +1,9 @@
+<label> {{ label }}</label>
+<div class="input-container">
+  <input type="range"
+         #inputElement
+         data-testid="input"/>
+  <a style="font-size: 1.5rem; width: 10%; padding-left: 5%;">
+    {{inputElement.value}}
+  </a>
+</div>
