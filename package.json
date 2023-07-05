@@ -34,7 +34,6 @@
     "@types/jest": "latest",
     "@types/node": "^12.11.1",
     "jest": "latest",
-    "jest-preset-angular": "^13.1.1",
     "typescript": "~4.9.5"
   },
   "jest": {
