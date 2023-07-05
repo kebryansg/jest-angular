@@ -13,27 +13,32 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~13.3.0",
-    "@angular/common": "~13.3.0",
-    "@angular/compiler": "~13.3.0",
-    "@angular/core": "~13.3.0",
-    "@angular/forms": "~13.3.0",
-    "@angular/platform-browser": "~13.3.0",
-    "@angular/platform-browser-dynamic": "~13.3.0",
-    "@angular/router": "~13.3.0",
+    "@angular/animations": "^15.2.9",
+    "@angular/common": "^15.2.9",
+    "@angular/compiler": "^15.2.9",
+    "@angular/core": "^15.2.9",
+    "@angular/forms": "^15.2.9",
+    "@angular/platform-browser": "^15.2.9",
+    "@angular/platform-browser-dynamic": "^15.2.9",
+    "@angular/router": "^15.2.9",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-builders/jest": "^13.0.3",
-    "@angular-devkit/build-angular": "~13.3.6",
-    "@angular/cli": "~13.3.6",
-    "@angular/compiler-cli": "~13.3.0",
+    "@angular-builders/jest": "^15.0.0",
+    "@angular-devkit/build-angular": "^15.2.9",
+    "@angular/cli": "^15.2.9",
+    "@angular/compiler-cli": "^15.2.9",
     "@briebug/jest-schematic": "^4.0.0",
-    "@types/jest": "27.0.0",
+    "@types/jest": "latest",
     "@types/node": "^12.11.1",
-    "jest": "27.0.0",
-    "typescript": "~4.6.2"
+    "jest": "latest",
+    "typescript": "~4.9.5"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": ["<rootDir>/setup-jest.ts"],
+    "globalSetup": "jest-preset-angular/global-setup"
   }
 }
