@@ -9,7 +9,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
+import {ControlValueAccessor, UntypedFormControl, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
 
 export const enum STATE {
   NORMAL = 'normal',
@@ -60,7 +60,7 @@ export class InputValueAcessorDirective
   }
 
   get formControl() {
-    return this.ngControl.control! as FormControl;
+    return this.ngControl.control! as UntypedFormControl;
   }
 
   writeValue(value: any) {
